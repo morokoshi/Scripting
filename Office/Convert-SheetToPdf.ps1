@@ -19,6 +19,7 @@ Function ConvertWorkbooks{
         Write-Progress -Activity "PDFに変換しています..." -Status $SourceFileName -PercentComplete ($Index / $SourceFiles.Count * 100)
         Try{
             $ExcelApplication = New-Object -ComObject Excel.Application
+            $ExcelApplication.Visible = $False
             $Workbook = $ExcelApplication.Workbooks.Open($SourceFileName, $False, $True)
             # https://msdn.microsoft.com/ja-jp/library/microsoft.office.tools.Excel.workbook.exportasfixedformat.aspx?cs-save-lang=1&cs-lang=vb#code-snippet-1
             Try{
@@ -52,7 +53,6 @@ function GetDestinationFileName($SourceFileName){
     return $DestinationFileName
 }
 
-$ExcelApplication.Visible = $False
 
 # 変換するファイルを指定する
 $SourceFiles = Get-ChildItem -Recurse -Include "*.xls", "*.xlsx"
