@@ -92,10 +92,10 @@ Function Get-AppxProvisionedPackageDisplayName{
 
 # 実行サンプル
 # Usage1: Get-AppxPackage の結果
-Get-AppxPackage | ForEach-Object {Get-AppxPackageDisplayName $_} | Select-Object Name, DisplayName | Export-Csv -Path C:\Get-AppxPackage.csv -Encoding UTF8 -NoTypeInformation
+Get-AppxPackage | ForEach-Object {Get-AppxPackageDisplayName $_} | Select-Object Name, DisplayName | Format-Table -AutoSize
 
 # Usage2: Get-AppxProvisionedPackage の結果
 $AppxPackageDisplayName = Get-AppxPackage | ForEach-Object {Get-AppxPackageDisplayName $_}
 Get-AppxProvisionedPackage -Online | ForEach-Object{
     $AppxPackageDisplayName | Where-Object Name -eq $_.DisplayName
-} | Select-Object Name, DisplayName | Export-Csv -Path C:\Get-AppxProvisionedPackage.csv -Encoding UTF8 -NoTypeInformation
+} | Select-Object Name, DisplayName | Format-Table -AutoSize
